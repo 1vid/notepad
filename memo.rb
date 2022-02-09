@@ -1,4 +1,5 @@
 class Memo < Post
+
   def read_from_console
     # todo
   end
@@ -6,4 +7,5 @@ class Memo < Post
   def to_strings
     # todo
   end
+  
 end
