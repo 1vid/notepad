@@ -33,14 +33,16 @@ OptionParser.new do |opt|
   # метод parse, чтобы он заполнил наш хэш options в соответствии с правилами.
 end.parse!
 
-result = Post.find(options[:limit], options[:type], options[:id])
+result = if options[:id].nil?
+           Post.find_all(options[:limit], options[:type])
+         else
+           Post.find_all(options[:id])
+         end
 
 if result.is_a? Post
   puts "Запись #{result.class.name}, id = #{options[:id]}"
 
-  result.to_strings.each do |line|
-    puts line
-  end
+  result.to_strings.each(&:puts)
 else
   print '| id                 '
   print '| @type              '
